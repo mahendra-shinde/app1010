@@ -1,0 +1,20 @@
+name: Github Script Demo
+
+on:
+  issues:
+    type: [ opened ]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/github-script@v8
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          github.issues.createComment( { 
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: 'Congrats on your FIRST Automated Comment'
+           })
